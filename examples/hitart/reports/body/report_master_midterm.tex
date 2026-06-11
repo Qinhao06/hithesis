@@ -5,12 +5,6 @@
 \setcounter{tocdepth}{3}
 
 
-\section*{题目}
-\addcontentsline{toc}{section}{题目}
-
-
-结合大模型的表格识别方法与系统
-
 
 \section{课题主要研究内容及进度}
 
@@ -256,6 +250,13 @@
 
 在结果选择阶段，系统并不是单纯依据某一个图像质量指标进行排序，而是通过综合评分机制对每一条候选路径的结果进行统一比较，最终输出最优图像。同时，系统还会保存最佳策略、各候选路径得分以及链条内部的步骤决策信息，使整个预处理过程具备较好的可回溯性和可解释性。对于中期研究而言，这种设计不仅提升了方法本身的自适应能力，也为后续实验分析、失败样例排查和模块迭代优化提供了重要依据。
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/midterm_preprocess_framework.png}
+\caption{动态感知表格预处理模块框架}
+\end{figure}
+
+
 
 \subsubsection{关键实现}
 
@@ -355,6 +356,13 @@ WTW & + Preprocess & 3324 & \textbf{0.2322} & \textbf{0.3828} \\
 
 从输入输出形式看，该方法的输入主要包括预处理后的表格图像以及可选的参考示例集合。当检索到高相关示例时，方法采用少样本上下文学习方式进行识别；当示例不足、示例失配或示例库未启用时，则自动切换为无示例识别方式，以避免错误示例对模型产生误导。输出方面，当前实现以表格标签结果作为核心中间表示，并进一步构造内容矩阵、单元格级结构化列表和结果摘要，以支撑后续评估、前端展示及结构化导出。这种设计保证了该方法既能面向算法实验输出标准结果，又能输出可用于原型展示与后续分析的结构化数据。
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/midterm_context_recognition.png}
+\caption{上下文学习驱动的表格识别与结果修复方法框架}
+\end{figure}
+
+
 
 \subsubsection{特征提取与示例检索机制}
 
@@ -409,6 +417,13 @@ WTW & + Preprocess & 3324 & \textbf{0.2322} & \textbf{0.3828} \\
 
 在上述过程中，本地文字识别主要作为一种辅助性回退手段存在。当局部单元格文本可信度较低，或结构与原图之间的对应关系存在疑点时，可调用本地文字识别工具对局部单元格区域进行再次识别，以增强低质量文本的恢复能力。需要说明的是，这一本地回退方案当前并不替代主链路中的大模型结构生成与内容恢复过程，而是主要服务于局部补偿、细节校正和极端样本下的可用性保障。因此，从课题结构上看，将该部分单独作为“后处理与局部细化”模块展开表述，更能体现当前方法已经初步形成了“识别—评估—修复”的闭环设计，而不是仅停留在一次性生成结果的阶段。
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/midterm_quality_postprocess.png}
+\caption{识别结果质量评估与后处理框架}
+\end{figure}
+
+
 
 \subsubsection{阶段性实验结果与阶段判断}
 
@@ -437,6 +452,12 @@ WTW & + Preprocess & 3324 & \textbf{0.2322} & \textbf{0.3828} \\
 
 
 在整体数据流上，当前系统主要面向图像上传场景展开：用户首先上传表格图片，系统完成文件保存与合法性校验；随后在后端触发识别流程，调用核心识别系统完成预处理、结构识别和结果生成；最后将原始图像、预处理图像、识别摘要、结构结果和结构化数据返回给前端，并支持结果的进一步查看、复制和下载。需要说明的是，当前 Web 端原型仍以图片上传识别为主，虽然底层处理链对文档页面解析具备一定支持，但尚未在当前前端交互中完全展开，因此系统实现描述应以当前已稳定开放的功能为准。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/midterm_system_architecture.png}
+\caption{表格识别系统前后端架构}
+\end{figure}
 
 
 \subsubsection{核心流程实现}
