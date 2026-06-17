@@ -385,129 +385,110 @@ S_{\mathrm{select}}(I_k)=S_{\mathrm{total}}(I_k)+0.1\,\mathbf{1}_{\mathrm{smart\
 
 \begin{center}
 \small
-\textbf{表 2-1 Qwen3-VL-8B 在不同场景下的预处理对照结果}
+\textbf{表 2-1 动态预处理在不同模型与场景下的对照结果}
 
 \renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{1.8cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{2.4cm}|}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
-场景 & 设置 & TEDS & TEDS-Struct \\
+场景 & 指标 & \multicolumn{3}{c|}{Qwen3-VL-8B} & \multicolumn{3}{c|}{Gemma-4-E4B} \\
+\cline{3-8}
+ &  & Baseline & + Preprocess & $\Delta$ & Baseline & + Preprocess & $\Delta$ \\
 \hline
-Pub & Baseline & 0.6833 & 0.8500 \\
+Pub & TEDS & 68.33 & \textbf{68.51} & +0.18 & \textbf{69.51} & 69.01 & -0.50 \\
 \hline
-Pub & + Preprocess & \textbf{0.6851} & \textbf{0.8776} \\
+Pub & TEDS-Struct & 85.00 & \textbf{87.76} & +2.76 & 84.65 & \textbf{85.73} & +1.08 \\
 \hline
-Sci & Baseline & 0.8530 & 0.9210 \\
+Sci & TEDS & 85.30 & \textbf{90.45} & +5.15 & 83.60 & \textbf{84.38} & +0.78 \\
 \hline
-Sci & + Preprocess & \textbf{0.9045} & \textbf{0.9573} \\
+Sci & TEDS-Struct & 92.10 & \textbf{95.73} & +3.63 & 91.82 & \textbf{92.06} & +0.24 \\
 \hline
-WTW & Baseline & - & 0.3684 \\
+WTW & TEDS-Struct & 36.84 & \textbf{40.61} & +3.77 & 36.27 & \textbf{38.28} & +2.01 \\
 \hline
-WTW & + Preprocess & - & \textbf{0.4061} \\
-\hline
-\end{tabularx}
+\end{tabular}
+}
 \end{center}
 
 
-由表 2-1 可见，Qwen3-VL-8B 在 Pub、Sci 和 WTW 三类场景中引入预处理后，结构指标均有不同程度提升；其中 Pub 和 Sci 场景下整体指标也呈现同步改善。其中，Pub 场景下 TEDS 由 0.6833 提升至 0.6851，TEDS-Struct 由 0.8500 提升至 0.8776；Sci 场景下增益最为明显，TEDS 由 0.8530 提升至 0.9045，TEDS-Struct 由 0.9210 提升至 0.9573；WTW 场景下当前主要统计 TEDS-Struct 指标，其结果由 0.3684 提升至 0.4061。整体来看，Qwen3-VL-8B 在当前补充实验中表现出较稳定的结构恢复增益，说明动态预处理能够有效改善表格骨架可辨识性，而其对整体识别质量的带动作用则主要在 Pub 和 Sci 等具备完整 TEDS 统计的场景中得到体现。
+由表 2-1 可见，动态预处理在不同模型和场景中的收益具有一定差异，但对结构恢复质量的改善整体更为稳定。对于 Qwen3-VL-8B，Pub、Sci 和 WTW 三类场景下的 \textbf{TEDS-Struct} 均有明显提升，其中 Sci 场景下的整体收益最为突出，TEDS 和 TEDS-Struct 分别提升 5.15 和 3.63；在 Pub 场景下，两项指标也分别提升 0.18 和 2.76。对于 Gemma-4-E4B，Sci 和 WTW 场景均表现出稳定正增益，Pub 场景下虽然 TEDS 从 69.51 小幅下降到 69.01，但 TEDS-Struct 仍由 84.65 提升至 85.73，说明该模型在当前设置下同样更容易从结构层面的预处理增强中受益。
 
 
-\begin{center}
-\small
-\textbf{表 2-2 Gemma-4-E4B 在不同场景下的预处理对照结果}
-
-\renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{1.8cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{2.4cm}|}
-\hline
-场景 & 设置 & TEDS & TEDS-Struct \\
-\hline
-Pub & Baseline & \textbf{0.6951} & 0.8465 \\
-\hline
-Pub & + Preprocess & 0.6901 & \textbf{0.8573} \\
-\hline
-Sci & Baseline & 0.8360 & 0.9182 \\
-\hline
-Sci & + Preprocess & \textbf{0.8438} & \textbf{0.9206} \\
-\hline
-WTW & Baseline & - & 0.3627 \\
-\hline
-WTW & + Preprocess & - & \textbf{0.3828} \\
-\hline
-\end{tabularx}
-\end{center}
-
-
-为便于整体比较不同模型在多类场景下引入动态预处理前后的变化，图\ref{fig:preprocess-effect-bars} 进一步以柱状图形式汇总了表 2-1 与表 2-2 中的主要结果。可以看出，当前阶段预处理对 \textbf{TEDS-Struct} 的提升更为稳定，而 \textbf{TEDS} 的改善则与模型配置和场景复杂度密切相关。
+为便于整体比较不同模型在多类场景下引入动态预处理前后的变化，图\ref{fig:preprocess-effect-bars} 进一步以柱状图形式汇总了表 2-1 中的主要结果。可以看出，当前阶段预处理对 \textbf{TEDS-Struct} 的提升更为稳定，而 \textbf{TEDS} 的改善则与模型配置和场景复杂度密切相关。
 
 \begin{figure}[htbp]
 \centering
 \begin{minipage}{0.42\textwidth}
 \centering
-\begin{tikzpicture}[x=1cm,y=5.3cm]
-  \draw[thick] (0,0.30) -- (0,1.02);
-  \draw[thick] (0,0.30) -- (6.3,0.30);
-  \foreach \yy in {0.30,0.50,0.70,0.90,1.00} {
+\resizebox{\linewidth}{!}{
+\begin{tikzpicture}[x=1cm,y=4.1cm]
+  \draw[thick] (0,0) -- (0,1.02);
+  \draw[thick] (0,0) -- (6.3,0);
+  \foreach \yy in {0.00,0.20,0.40,0.60,0.80,1.00} {
     \draw[gray!25] (0,\yy) -- (6.1,\yy);
     \node[left,font=\scriptsize] at (0,\yy) {\yy};
   }
-  \node[rotate=90,font=\scriptsize] at (-0.8,0.66) {TEDS};
-  \fill[blue!65]   (0.55,0.30) rectangle (0.85,0.6833);
-  \fill[orange!85] (0.92,0.30) rectangle (1.22,0.6851);
-  \fill[blue!65]   (2.00,0.30) rectangle (2.30,0.8530);
-  \fill[orange!85] (2.37,0.30) rectangle (2.67,0.9045);
-  \fill[blue!65]   (3.95,0.30) rectangle (4.25,0.6951);
-  \fill[orange!85] (4.32,0.30) rectangle (4.62,0.6901);
-  \fill[blue!65]   (5.40,0.30) rectangle (5.70,0.8360);
-  \fill[orange!85] (5.77,0.30) rectangle (6.07,0.8438);
-  \node[below,font=\scriptsize,align=center] at (0.89,0.30) {Qwen\\Pub};
-  \node[below,font=\scriptsize,align=center] at (2.34,0.30) {Qwen\\Sci};
-  \node[below,font=\scriptsize,align=center] at (4.29,0.30) {Gemma\\Pub};
-  \node[below,font=\scriptsize,align=center] at (5.74,0.30) {Gemma\\Sci};
+  \node[rotate=90,font=\scriptsize] at (-1.10,0.50) {TEDS};
+  \fill[blue!65]   (0.55,0) rectangle (0.85,0.6833);
+  \fill[orange!85] (0.92,0) rectangle (1.22,0.6851);
+  \fill[blue!65]   (2.00,0) rectangle (2.30,0.8530);
+  \fill[orange!85] (2.37,0) rectangle (2.67,0.9045);
+  \fill[blue!65]   (3.95,0) rectangle (4.25,0.6951);
+  \fill[orange!85] (4.32,0) rectangle (4.62,0.6901);
+  \fill[blue!65]   (5.40,0) rectangle (5.70,0.8360);
+  \fill[orange!85] (5.77,0) rectangle (6.07,0.8438);
+  \node[below,font=\scriptsize,align=center] at (0.89,0) {Qwen\\Pub};
+  \node[below,font=\scriptsize,align=center] at (2.34,0) {Qwen\\Sci};
+  \node[below,font=\scriptsize,align=center] at (4.29,0) {Gemma\\Pub};
+  \node[below,font=\scriptsize,align=center] at (5.74,0) {Gemma\\Sci};
   \fill[blue!65] (0.30,0.98) rectangle (0.55,1.03);
-  \node[anchor=west,font=\scriptsize] at (0.65,1.005) {Baseline};
+  \node[anchor=west,font=\scriptsize] at (0.59,1.005) {Baseline};
   \fill[orange!85] (2.05,0.98) rectangle (2.30,1.03);
-  \node[anchor=west,font=\scriptsize] at (2.40,1.005) {+ Preprocess};
+  \node[anchor=west,font=\scriptsize] at (2.34,1.005) {+ Preprocess};
 \end{tikzpicture}
+}
 \end{minipage}
 \hspace{0.015\textwidth}
 \begin{minipage}{0.43\textwidth}
 \centering
-\begin{tikzpicture}[x=0.74cm,y=5.1cm]
-  \draw[thick] (0,0.30) -- (0,1.02);
-  \draw[thick] (0,0.30) -- (8.1,0.30);
-  \foreach \yy in {0.30,0.50,0.70,0.90,1.00} {
+\resizebox{\linewidth}{!}{
+\begin{tikzpicture}[x=0.74cm,y=4.0cm]
+  \draw[thick] (0,0) -- (0,1.02);
+  \draw[thick] (0,0) -- (8.1,0);
+  \foreach \yy in {0.00,0.20,0.40,0.60,0.80,1.00} {
     \draw[gray!25] (0,\yy) -- (7.9,\yy);
     \node[left,font=\scriptsize] at (0,\yy) {\yy};
   }
-  \node[rotate=90,font=\scriptsize] at (-0.8,0.66) {TEDS-Struct};
-  \fill[blue!65]   (0.45,0.30) rectangle (0.72,0.8500);
-  \fill[orange!85] (0.78,0.30) rectangle (1.05,0.8776);
-  \fill[blue!65]   (1.75,0.30) rectangle (2.02,0.9210);
-  \fill[orange!85] (2.08,0.30) rectangle (2.35,0.9573);
-  \fill[blue!65]   (3.05,0.30) rectangle (3.32,0.3684);
-  \fill[orange!85] (3.38,0.30) rectangle (3.65,0.4061);
-  \fill[blue!65]   (4.60,0.30) rectangle (4.87,0.8465);
-  \fill[orange!85] (4.93,0.30) rectangle (5.20,0.8573);
-  \fill[blue!65]   (5.90,0.30) rectangle (6.17,0.9182);
-  \fill[orange!85] (6.23,0.30) rectangle (6.50,0.9206);
-  \fill[blue!65]   (7.20,0.30) rectangle (7.47,0.3627);
-  \fill[orange!85] (7.53,0.30) rectangle (7.80,0.3828);
-  \node[below,font=\scriptsize,align=center] at (0.75,0.30) {Qwen\\Pub};
-  \node[below,font=\scriptsize,align=center] at (2.05,0.30) {Qwen\\Sci};
-  \node[below,font=\scriptsize,align=center] at (3.35,0.30) {Qwen\\WTW};
-  \node[below,font=\scriptsize,align=center] at (4.90,0.30) {Gemma\\Pub};
-  \node[below,font=\scriptsize,align=center] at (6.20,0.30) {Gemma\\Sci};
-  \node[below,font=\scriptsize,align=center] at (7.50,0.30) {Gemma\\WTW};
+  \node[rotate=90,font=\scriptsize] at (-1.20,0.50) {TEDS-Struct};
+  \fill[blue!65]   (0.45,0) rectangle (0.72,0.8500);
+  \fill[orange!85] (0.78,0) rectangle (1.05,0.8776);
+  \fill[blue!65]   (1.75,0) rectangle (2.02,0.9210);
+  \fill[orange!85] (2.08,0) rectangle (2.35,0.9573);
+  \fill[blue!65]   (3.05,0) rectangle (3.32,0.3684);
+  \fill[orange!85] (3.38,0) rectangle (3.65,0.4061);
+  \fill[blue!65]   (4.60,0) rectangle (4.87,0.8465);
+  \fill[orange!85] (4.93,0) rectangle (5.20,0.8573);
+  \fill[blue!65]   (5.90,0) rectangle (6.17,0.9182);
+  \fill[orange!85] (6.23,0) rectangle (6.50,0.9206);
+  \fill[blue!65]   (7.20,0) rectangle (7.47,0.3627);
+  \fill[orange!85] (7.53,0) rectangle (7.80,0.3828);
+  \node[below,font=\scriptsize,align=center] at (0.75,0) {Qwen\\Pub};
+  \node[below,font=\scriptsize,align=center] at (2.05,0) {Qwen\\Sci};
+  \node[below,font=\scriptsize,align=center] at (3.35,0) {Qwen\\WTW};
+  \node[below,font=\scriptsize,align=center] at (4.90,0) {Gemma\\Pub};
+  \node[below,font=\scriptsize,align=center] at (6.20,0) {Gemma\\Sci};
+  \node[below,font=\scriptsize,align=center] at (7.50,0) {Gemma\\WTW};
 \end{tikzpicture}
+}
 \end{minipage}
 \caption{动态预处理在不同模型与场景下的效果对比}
 \label{fig:preprocess-effect-bars}
 \end{figure}
 
 
-由表 2-2 可见，动态预处理模块在不同场景下的收益存在差异，但对结构恢复质量的改善整体上更为稳定。具体而言，Pub 场景下 TEDS-Struct 有所提升而 TEDS 略有波动；Sci 场景下两项指标均有小幅改善；WTW 场景下结构指标提升最为明显。这说明当前预处理策略首先改善的是表格边界、线条连续性和布局骨架可辨识性，而这些结构层面的收益能否稳定转化为内容级提升，还需要结合后续识别与内容对齐模块进一步验证。
+由表 2-1 可见，动态预处理模块在不同场景下的收益存在差异，但对结构恢复质量的改善整体上更为稳定。具体而言，Pub 场景下 TEDS-Struct 有所提升而 TEDS 略有波动；Sci 场景下两项指标均有小幅改善；WTW 场景下结构指标提升最为明显。这说明当前预处理策略首先改善的是表格边界、线条连续性和布局骨架可辨识性，而这些结构层面的收益能否稳定转化为内容级提升，还需要结合后续识别与内容对齐模块进一步验证。
 
 
-综合表 2-1 和表 2-2 可以看出，当前预处理模块对 \textbf{TEDS-Struct} 的改善通常更为稳定，而在具备完整统计的部分模型配置下也能同步带动 \textbf{TEDS} 提升。具体而言，Qwen3-VL-8B 在 Pub 和 Sci 场景下表现出两项指标同步增长的趋势，WTW 场景下则主要体现为结构指标改善，说明其对预处理增强较为敏感；Gemma-4-E4B 也表现出结构指标提升更为一致、内容级指标提升相对温和的特征。这说明当前预处理首先改善的是图像层面的结构可恢复性，而内容级指标的稳定提升仍受到后续结构生成、文字识别和内容对齐等环节共同影响。因此，现阶段预处理模块的研究价值，主要在于验证了其对结构恢复的正向作用，并为下一步围绕复杂场景继续优化结构质量提供了实验依据。
+综合表 2-1 可以看出，当前预处理模块对 \textbf{TEDS-Struct} 的改善通常更为稳定，而在具备完整统计的部分模型配置下也能同步带动 \textbf{TEDS} 提升。具体而言，Qwen3-VL-8B 在 Pub 和 Sci 场景下表现出两项指标同步增长的趋势，WTW 场景下则主要体现为结构指标改善，说明其对预处理增强较为敏感；Gemma-4-E4B 也表现出结构指标提升更为一致、内容级指标提升相对温和的特征。这说明当前预处理首先改善的是图像层面的结构可恢复性，而内容级指标的稳定提升仍受到后续结构生成、文字识别和内容对齐等环节共同影响。因此，现阶段预处理模块的研究价值，主要在于验证了其对结构恢复的正向作用，并为下一步围绕复杂场景继续优化结构质量提供了实验依据。
 
 
 当然，当前模块仍存在进一步提升空间。首先，候选处理操作的类型仍相对有限，对于严重阴影、明显几何畸变和极低质量样本的适应能力还有待增强；其次，当前综合评分机制虽然已经能够较好支持首轮筛选，但其权重设置和决策阈值仍具有一定经验性，后续还需要结合更多实验结果进行调整；再次，多候选并行执行虽然提高了选择能力，但也会带来额外的时间开销，后续需要在效果与效率之间进一步平衡。下一阶段，本课题将继续围绕候选链生成策略优化、评分机制细化、复杂场景专用操作补充以及与后续识别模块的协同验证等方面展开工作，以进一步提升动态预处理模块的稳定性和实际收益。
