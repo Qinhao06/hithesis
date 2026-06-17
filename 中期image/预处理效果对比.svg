@@ -1,0 +1,97 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1180' height='620' viewBox='0 0 1180 620'>
+<rect width='100%' height='100%' fill='white'/>
+<style>text{font-family:PingFang SC, Noto Sans CJK SC, Microsoft YaHei, Arial, sans-serif;fill:#222} .small{font-size:14px} .med{font-size:16px} .label{font-size:18px;font-weight:600} .title{font-size:22px;font-weight:700} .cap{font-size:13px;fill:#555}</style>
+<text x='590.0' y='34' text-anchor='middle' class='title'>动态预处理在不同模型与场景下的效果对比</text>
+<rect x='50' y='70' width='500' height='470' fill='none' stroke='#d1d5db'/>
+<text x='300.0' y='55' text-anchor='middle' class='label'>TEDS</text>
+<line x1='50' y1='540' x2='550' y2='540' stroke='#e5e7eb'/>
+<text x='42' y='545' text-anchor='end' class='small'>0.0</text>
+<line x1='50' y1='446.0' x2='550' y2='446.0' stroke='#e5e7eb'/>
+<text x='42' y='451.0' text-anchor='end' class='small'>0.2</text>
+<line x1='50' y1='352.0' x2='550' y2='352.0' stroke='#e5e7eb'/>
+<text x='42' y='357.0' text-anchor='end' class='small'>0.4</text>
+<line x1='50' y1='258.0' x2='550' y2='258.0' stroke='#e5e7eb'/>
+<text x='42' y='263.0' text-anchor='end' class='small'>0.6</text>
+<line x1='50' y1='164.0' x2='550' y2='164.0' stroke='#e5e7eb'/>
+<text x='42' y='169.0' text-anchor='end' class='small'>0.8</text>
+<line x1='50' y1='70.0' x2='550' y2='70.0' stroke='#e5e7eb'/>
+<text x='42' y='75.0' text-anchor='end' class='small'>1.0</text>
+<rect x='96.5' y='218.849' width='22' height='321.151' fill='#3b82f6' rx='3'/>
+<text x='107.5' y='212.849' text-anchor='middle' class='small'>0.6833</text>
+<rect x='124.5' y='218.003' width='22' height='321.997' fill='#f59e0b' rx='3'/>
+<text x='135.5' y='212.003' text-anchor='middle' class='small'>0.6851</text>
+<text x='112.5' y='562' text-anchor='middle' class='small'>Qwen</text>
+<text x='112.5' y='580' text-anchor='middle' class='small'>Pub</text>
+<rect x='221.5' y='139.09000000000003' width='22' height='400.90999999999997' fill='#3b82f6' rx='3'/>
+<text x='232.5' y='133.09000000000003' text-anchor='middle' class='small'>0.8530</text>
+<rect x='249.5' y='114.88499999999999' width='22' height='425.115' fill='#f59e0b' rx='3'/>
+<text x='260.5' y='108.88499999999999' text-anchor='middle' class='small'>0.9045</text>
+<text x='237.5' y='562' text-anchor='middle' class='small'>Qwen</text>
+<text x='237.5' y='580' text-anchor='middle' class='small'>Sci</text>
+<rect x='346.5' y='213.303' width='22' height='326.697' fill='#3b82f6' rx='3'/>
+<text x='357.5' y='207.303' text-anchor='middle' class='small'>0.6951</text>
+<rect x='374.5' y='215.65299999999996' width='22' height='324.34700000000004' fill='#f59e0b' rx='3'/>
+<text x='385.5' y='209.65299999999996' text-anchor='middle' class='small'>0.6901</text>
+<text x='362.5' y='562' text-anchor='middle' class='small'>Gemma</text>
+<text x='362.5' y='580' text-anchor='middle' class='small'>Pub</text>
+<rect x='471.5' y='147.08000000000004' width='22' height='392.91999999999996' fill='#3b82f6' rx='3'/>
+<text x='482.5' y='141.08000000000004' text-anchor='middle' class='small'>0.8360</text>
+<rect x='499.5' y='143.414' width='22' height='396.586' fill='#f59e0b' rx='3'/>
+<text x='510.5' y='137.414' text-anchor='middle' class='small'>0.8438</text>
+<text x='487.5' y='562' text-anchor='middle' class='small'>Gemma</text>
+<text x='487.5' y='580' text-anchor='middle' class='small'>Sci</text>
+<rect x='630' y='70' width='500' height='470' fill='none' stroke='#d1d5db'/>
+<text x='880.0' y='55' text-anchor='middle' class='label'>TEDS-Struct</text>
+<line x1='630' y1='540' x2='1130' y2='540' stroke='#e5e7eb'/>
+<text x='622' y='545' text-anchor='end' class='small'>0.0</text>
+<line x1='630' y1='446.0' x2='1130' y2='446.0' stroke='#e5e7eb'/>
+<text x='622' y='451.0' text-anchor='end' class='small'>0.2</text>
+<line x1='630' y1='352.0' x2='1130' y2='352.0' stroke='#e5e7eb'/>
+<text x='622' y='357.0' text-anchor='end' class='small'>0.4</text>
+<line x1='630' y1='258.0' x2='1130' y2='258.0' stroke='#e5e7eb'/>
+<text x='622' y='263.0' text-anchor='end' class='small'>0.6</text>
+<line x1='630' y1='164.0' x2='1130' y2='164.0' stroke='#e5e7eb'/>
+<text x='622' y='169.0' text-anchor='end' class='small'>0.8</text>
+<line x1='630' y1='70.0' x2='1130' y2='70.0' stroke='#e5e7eb'/>
+<text x='622' y='75.0' text-anchor='end' class='small'>1.0</text>
+<rect x='655.6666666666666' y='140.5' width='22' height='399.5' fill='#3b82f6' rx='3'/>
+<text x='666.6666666666666' y='134.5' text-anchor='middle' class='small'>0.8500</text>
+<rect x='683.6666666666666' y='127.52799999999996' width='22' height='412.47200000000004' fill='#f59e0b' rx='3'/>
+<text x='694.6666666666666' y='121.52799999999996' text-anchor='middle' class='small'>0.8776</text>
+<text x='671.6666666666666' y='562' text-anchor='middle' class='small'>Qwen</text>
+<text x='671.6666666666666' y='580' text-anchor='middle' class='small'>Pub</text>
+<rect x='739.0' y='107.13' width='22' height='432.87' fill='#3b82f6' rx='3'/>
+<text x='750.0' y='101.13' text-anchor='middle' class='small'>0.9210</text>
+<rect x='767.0' y='90.06899999999996' width='22' height='449.93100000000004' fill='#f59e0b' rx='3'/>
+<text x='778.0' y='84.06899999999996' text-anchor='middle' class='small'>0.9573</text>
+<text x='755.0' y='562' text-anchor='middle' class='small'>Qwen</text>
+<text x='755.0' y='580' text-anchor='middle' class='small'>Sci</text>
+<rect x='822.3333333333333' y='366.852' width='22' height='173.14800000000002' fill='#3b82f6' rx='3'/>
+<text x='833.3333333333333' y='360.852' text-anchor='middle' class='small'>0.3684</text>
+<rect x='850.3333333333333' y='349.133' width='22' height='190.86700000000002' fill='#f59e0b' rx='3'/>
+<text x='861.3333333333333' y='343.133' text-anchor='middle' class='small'>0.4061</text>
+<text x='838.3333333333333' y='562' text-anchor='middle' class='small'>Qwen</text>
+<text x='838.3333333333333' y='580' text-anchor='middle' class='small'>WTW</text>
+<rect x='905.6666666666666' y='142.14499999999998' width='22' height='397.855' fill='#3b82f6' rx='3'/>
+<text x='916.6666666666666' y='136.14499999999998' text-anchor='middle' class='small'>0.8465</text>
+<rect x='933.6666666666666' y='137.06900000000002' width='22' height='402.931' fill='#f59e0b' rx='3'/>
+<text x='944.6666666666666' y='131.06900000000002' text-anchor='middle' class='small'>0.8573</text>
+<text x='921.6666666666666' y='562' text-anchor='middle' class='small'>Gemma</text>
+<text x='921.6666666666666' y='580' text-anchor='middle' class='small'>Pub</text>
+<rect x='989.0' y='108.44599999999997' width='22' height='431.55400000000003' fill='#3b82f6' rx='3'/>
+<text x='1000.0' y='102.44599999999997' text-anchor='middle' class='small'>0.9182</text>
+<rect x='1017.0' y='107.31800000000004' width='22' height='432.68199999999996' fill='#f59e0b' rx='3'/>
+<text x='1028.0' y='101.31800000000004' text-anchor='middle' class='small'>0.9206</text>
+<text x='1005.0' y='562' text-anchor='middle' class='small'>Gemma</text>
+<text x='1005.0' y='580' text-anchor='middle' class='small'>Sci</text>
+<rect x='1072.3333333333333' y='369.53099999999995' width='22' height='170.46900000000005' fill='#3b82f6' rx='3'/>
+<text x='1083.3333333333333' y='363.53099999999995' text-anchor='middle' class='small'>0.3627</text>
+<rect x='1100.3333333333333' y='360.084' width='22' height='179.916' fill='#f59e0b' rx='3'/>
+<text x='1111.3333333333333' y='354.084' text-anchor='middle' class='small'>0.3828</text>
+<text x='1088.3333333333333' y='562' text-anchor='middle' class='small'>Gemma</text>
+<text x='1088.3333333333333' y='580' text-anchor='middle' class='small'>WTW</text>
+<rect x='470' y='570' width='18' height='12' rx='2' fill='#3b82f6'/>
+<text x='496' y='581' class='small'>Baseline</text>
+<rect x='610' y='570' width='18' height='12' rx='2' fill='#f59e0b'/>
+<text x='636' y='581' class='small'>+ Preprocess</text>
+</svg>

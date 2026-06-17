@@ -1,0 +1,68 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1180' height='520' viewBox='0 0 1180 520'>
+<rect width='100%' height='100%' fill='white'/>
+<style>text{font-family:PingFang SC, Noto Sans CJK SC, Microsoft YaHei, Arial, sans-serif;fill:#222} .small{font-size:14px} .med{font-size:16px} .label{font-size:18px;font-weight:600} .title{font-size:22px;font-weight:700} .cap{font-size:13px;fill:#555}</style>
+<text x='590.0' y='34' text-anchor='middle' class='title'>后期研究工作进度安排甘特图</text>
+<rect x='240' y='80' width='130' height='64' fill='#f8fafc' stroke='#cbd5e1'/>
+<text x='305.0' y='118' text-anchor='middle' class='med'>2026.06</text>
+<rect x='370' y='80' width='130' height='64' fill='#f8fafc' stroke='#cbd5e1'/>
+<text x='435.0' y='118' text-anchor='middle' class='med'>2026.07</text>
+<rect x='500' y='80' width='130' height='64' fill='#f8fafc' stroke='#cbd5e1'/>
+<text x='565.0' y='118' text-anchor='middle' class='med'>2026.08</text>
+<rect x='630' y='80' width='130' height='64' fill='#f8fafc' stroke='#cbd5e1'/>
+<text x='695.0' y='118' text-anchor='middle' class='med'>2026.09</text>
+<rect x='760' y='80' width='130' height='64' fill='#f8fafc' stroke='#cbd5e1'/>
+<text x='825.0' y='118' text-anchor='middle' class='med'>2026.10</text>
+<rect x='890' y='80' width='130' height='64' fill='#f8fafc' stroke='#cbd5e1'/>
+<text x='955.0' y='118' text-anchor='middle' class='med'>2026.11</text>
+<rect x='40' y='144' width='200' height='64' fill='white' stroke='#cbd5e1'/>
+<text x='222' y='182' text-anchor='end' class='med'>核心方法继续优化</text>
+<rect x='240' y='144' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='370' y='144' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='500' y='144' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='630' y='144' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='760' y='144' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='890' y='144' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='250' y='156' width='240' height='40' rx='12' fill='#3b82f6' opacity='0.92'/>
+<text x='370.0' y='180' text-anchor='middle' class='med' fill='white'>方法优化</text>
+<rect x='40' y='208' width='200' height='64' fill='white' stroke='#cbd5e1'/>
+<text x='222' y='246' text-anchor='end' class='med'>实验补充与结果分析</text>
+<rect x='240' y='208' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='370' y='208' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='500' y='208' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='630' y='208' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='760' y='208' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='890' y='208' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='380' y='220' width='240' height='40' rx='12' fill='#f59e0b' opacity='0.92'/>
+<text x='500.0' y='244' text-anchor='middle' class='med' fill='white'>实验补充</text>
+<rect x='40' y='272' width='200' height='64' fill='white' stroke='#cbd5e1'/>
+<text x='222' y='310' text-anchor='end' class='med'>系统联调和原型完善</text>
+<rect x='240' y='272' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='370' y='272' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='500' y='272' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='630' y='272' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='760' y='272' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='890' y='272' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='510' y='284' width='240' height='40' rx='12' fill='#16a34a' opacity='0.92'/>
+<text x='630.0' y='308' text-anchor='middle' class='med' fill='white'>系统联调</text>
+<rect x='40' y='336' width='200' height='64' fill='white' stroke='#cbd5e1'/>
+<text x='222' y='374' text-anchor='end' class='med'>论文初稿撰写</text>
+<rect x='240' y='336' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='370' y='336' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='500' y='336' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='630' y='336' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='760' y='336' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='890' y='336' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='640' y='348' width='240' height='40' rx='12' fill='#8b5cf6' opacity='0.92'/>
+<text x='760.0' y='372' text-anchor='middle' class='med' fill='white'>论文初稿</text>
+<rect x='40' y='400' width='200' height='64' fill='white' stroke='#cbd5e1'/>
+<text x='222' y='438' text-anchor='end' class='med'>论文修改定稿与答辩准备</text>
+<rect x='240' y='400' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='370' y='400' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='500' y='400' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='630' y='400' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='760' y='400' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='890' y='400' width='130' height='64' fill='white' stroke='#e2e8f0'/>
+<rect x='770' y='412' width='110' height='40' rx='12' fill='#ef4444' opacity='0.92'/>
+<text x='825.0' y='436' text-anchor='middle' class='med' fill='white'>定稿答辩</text>
+<text x='590' y='490' text-anchor='middle' class='cap'>后续工作整体遵循“方法优化—实验补充—系统完善—论文撰写—定稿答辩”的阶段性推进顺序</text>
+</svg>

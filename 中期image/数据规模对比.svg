@@ -1,0 +1,36 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1080' height='560' viewBox='0 0 1080 560'>
+<rect width='100%' height='100%' fill='white'/>
+<style>text{font-family:PingFang SC, Noto Sans CJK SC, Microsoft YaHei, Arial, sans-serif;fill:#222} .small{font-size:14px} .med{font-size:16px} .label{font-size:18px;font-weight:600} .title{font-size:22px;font-weight:700} .cap{font-size:13px;fill:#555}</style>
+<text x='540.0' y='34' text-anchor='middle' class='title'>不同表格场景的数据规模对比</text>
+<line x1='90' y1='470.0' x2='1040' y2='470.0' stroke='#e5e7eb' stroke-width='1'/>
+<text x='80' y='475.0' text-anchor='end' class='small'>0</text>
+<line x1='90' y1='323.57142857142856' x2='1040' y2='323.57142857142856' stroke='#e5e7eb' stroke-width='1'/>
+<text x='80' y='328.57142857142856' text-anchor='end' class='small'>5000</text>
+<line x1='90' y1='177.1428571428571' x2='1040' y2='177.1428571428571' stroke='#e5e7eb' stroke-width='1'/>
+<text x='80' y='182.1428571428571' text-anchor='end' class='small'>10000</text>
+<line x1='90' y1='60.0' x2='1040' y2='60.0' stroke='#e5e7eb' stroke-width='1'/>
+<text x='80' y='65.0' text-anchor='end' class='small'>14000</text>
+<line x1='90' y1='60' x2='90' y2='470' stroke='#333' stroke-width='2'/>
+<line x1='90' y1='470' x2='1040' y2='470' stroke='#333' stroke-width='2'/>
+<text x='26' y='265.0' transform='rotate(-90 26 265.0)' class='med'>样本数量</text>
+<rect x='840' y='48' width='18' height='12' fill='#3b82f6' rx='2'/>
+<text x='865' y='59' class='small'>测试</text>
+<rect x='950' y='48' width='18' height='12' fill='#16a34a' rx='2'/>
+<text x='975' y='59' class='small'>示例库</text>
+<rect x='210' y='203.5' width='42' height='266.5' fill='#3b82f6' rx='4'/>
+<text x='231.0' y='195.5' text-anchor='middle' class='small'>9100</text>
+<rect x='262' y='323.57142857142856' width='42' height='146.42857142857144' fill='#16a34a' rx='4'/>
+<text x='283.0' y='315.57142857142856' text-anchor='middle' class='small'>5000</text>
+<text x='257' y='502' text-anchor='middle' class='label'>Pub</text>
+<rect x='490' y='382.14285714285717' width='42' height='87.85714285714283' fill='#3b82f6' rx='4'/>
+<text x='511.0' y='374.14285714285717' text-anchor='middle' class='small'>3000</text>
+<rect x='542' y='323.92285714285714' width='42' height='146.07714285714286' fill='#16a34a' rx='4'/>
+<text x='563.0' y='315.92285714285714' text-anchor='middle' class='small'>4988</text>
+<text x='537' y='502' text-anchor='middle' class='label'>Sci</text>
+<rect x='770' y='351.45142857142855' width='42' height='118.54857142857145' fill='#3b82f6' rx='4'/>
+<text x='791.0' y='343.45142857142855' text-anchor='middle' class='small'>4048</text>
+<rect x='822' y='323.57142857142856' width='42' height='146.42857142857144' fill='#16a34a' rx='4'/>
+<text x='843.0' y='315.57142857142856' text-anchor='middle' class='small'>5000</text>
+<text x='817' y='502' text-anchor='middle' class='label'>WTW</text>
+<text x='540' y='530' text-anchor='middle' class='cap'>Pub：出版物规则表格；Sci：科研论文复杂表格；WTW：弱线框与复杂布局表格</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1180' height='620' viewBox='0 0 1180 620'>
+<rect width='100%' height='100%' fill='white'/>
+<style>text{font-family:PingFang SC, Noto Sans CJK SC, Microsoft YaHei, Arial, sans-serif;fill:#222} .small{font-size:14px} .med{font-size:16px} .label{font-size:18px;font-weight:600} .title{font-size:22px;font-weight:700} .cap{font-size:13px;fill:#555}</style>
+<text x='590.0' y='34' text-anchor='middle' class='title'>典型样本候选链评分与步骤级决策示意</text>
+<rect x='60' y='90' width='360' height='420' fill='none' stroke='#d1d5db'/>
+<text x='240.0' y='72' text-anchor='middle' class='label'>候选结果综合评分</text>
+<line x1='60' y1='510.0' x2='420' y2='510.0' stroke='#e5e7eb'/>
+<text x='52' y='515.0' text-anchor='end' class='small'>0.00</text>
+<line x1='60' y1='357.27272727272725' x2='420' y2='357.27272727272725' stroke='#e5e7eb'/>
+<text x='52' y='362.27272727272725' text-anchor='end' class='small'>0.20</text>
+<line x1='60' y1='204.54545454545456' x2='420' y2='204.54545454545456' stroke='#e5e7eb'/>
+<text x='52' y='209.54545454545456' text-anchor='end' class='small'>0.40</text>
+<line x1='60' y1='90.0' x2='420' y2='90.0' stroke='#e5e7eb'/>
+<text x='52' y='95.0' text-anchor='end' class='small'>0.55</text>
+<rect x='145' y='132.99272727272728' width='58' height='377.0072727272727' fill='#3b82f6' rx='5'/>
+<text x='174' y='124.99272727272728' text-anchor='middle' class='med'>0.4937</text>
+<text x='174' y='536' text-anchor='middle' class='small'>原始图像</text>
+<rect x='285' y='117.26181818181823' width='58' height='392.7381818181818' fill='#f59e0b' rx='5'/>
+<text x='314' y='109.26181818181823' text-anchor='middle' class='med'>0.5143</text>
+<text x='314' y='536' text-anchor='middle' class='small'>最优候选链
+伽马校正+锐化</text>
+<text x='820' y='72' text-anchor='middle' class='label'>候选链内部决策过程</text>
+<rect x='520' y='220' width='150' height='72' rx='12' fill='#dbeafe' stroke='#64748b'/>
+<text x='595.0' y='250' text-anchor='middle' class='med'>原始图像</text>
+<text x='595.0' y='272' text-anchor='middle' class='small'>0.4937</text>
+<rect x='740' y='110' width='180' height='72' rx='12' fill='#f3f4f6' stroke='#64748b'/>
+<text x='830.0' y='140' text-anchor='middle' class='med'>去噪+增强对比度</text>
+<text x='830.0' y='162' text-anchor='middle' class='small'>候选未入选</text>
+<rect x='740' y='220' width='180' height='72' rx='12' fill='#ffedd5' stroke='#64748b'/>
+<text x='830.0' y='250' text-anchor='middle' class='med'>伽马校正</text>
+<text x='830.0' y='272' text-anchor='middle' class='small'>提升不明显，拒绝</text>
+<rect x='970' y='220' width='150' height='72' rx='12' fill='#dcfce7' stroke='#64748b'/>
+<text x='1045.0' y='250' text-anchor='middle' class='med'>锐化</text>
+<text x='1045.0' y='272' text-anchor='middle' class='small'>接受并保留</text>
+<rect x='970' y='360' width='150' height='72' rx='12' fill='#bbf7d0' stroke='#64748b'/>
+<text x='1045.0' y='390' text-anchor='middle' class='med'>最终输出</text>
+<text x='1045.0' y='412' text-anchor='middle' class='small'>0.5143</text>
+<defs><marker id='arrow' markerWidth='10' markerHeight='10' refX='8' refY='3' orient='auto'><path d='M0,0 L8,3 L0,6 Z' fill='#475569'/></marker></defs>
+<line x1='670' y1='256' x2='740' y2='256' stroke='#475569' stroke-width='2.5' marker-end='url(#arrow)'/>
+<path d='M670 236 C710 190, 700 160, 740 146' fill='none' stroke='#94a3b8' stroke-width='2' stroke-dasharray='7 5' marker-end='url(#arrow)'/>
+<line x1='920' y1='256' x2='970' y2='256' stroke='#475569' stroke-width='2.5' marker-end='url(#arrow)'/>
+<line x1='1045' y1='292' x2='1045' y2='360' stroke='#475569' stroke-width='2.5' marker-end='url(#arrow)'/>
+<text x='820' y='495' text-anchor='middle' class='cap'>系统会同时比较多条候选路径，并对最优链内部的每一步执行接受/拒绝判断</text>
+</svg>
