@@ -654,6 +654,24 @@ D_k=\arg\max_{D'\subseteq D_\tau,\ |D'|=k'}\left[\lambda\,\mathrm{Sim}(D',x_t)+(
 \end{figure}
 
 
+为更直观地展示当前原型系统在交互层面的实现形态，图\ref{fig:system-ui-overview} 给出了程序主界面与识别页面示意。可以看出，当前系统已经具备较完整的样本上传入口、识别任务触发方式以及页面级结果查看框架，能够较好支撑中期阶段的方法演示与系统联调。
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/system_ui_main.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/system_ui_recognition_page.png}
+\end{minipage}
+\caption{系统主界面与识别页面示意}
+\label{fig:system-ui-overview}
+\end{figure}
+
+
 \subsubsection{核心流程实现}
 
 
@@ -664,6 +682,15 @@ D_k=\arg\max_{D'\subseteq D_\tau,\ |D'|=k'}\left[\lambda\,\mathrm{Sim}(D',x_t)+(
 
 
 在结果保存与导出方面，当前系统已经能够保留识别结果，并支持后续查看与整理。返回结果中同时保留原始图像信息和预处理图像信息，使研究者能够对比观察预处理前后的差异；对于表格结果，则提供表格结构、单元格明细和内容矩阵等多种表示形式，便于以不同视角查看识别效果。总体来看，当前核心流程已经不仅仅完成“识别成功”这一目标，而是构建了一套较完整的结果组织与展示机制，使研究原型系统具备了较好的可观测性和可用性。
+
+为进一步说明当前系统对识别输出的组织与展示方式，图\ref{fig:system-ui-result} 展示了识别结果页面。页面中能够同时呈现原始输入、识别后的结构化结果以及结果查看区域，说明当前原型系统已经不仅具备算法调用能力，也具备较好的结果可视化与交互展示基础。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/system_ui_result.png}
+\caption{系统识别结果展示页面}
+\label{fig:system-ui-result}
+\end{figure}
 
 
 \subsubsection{阶段性总结}
