@@ -132,10 +132,10 @@
 从数据流转角度看，系统整体输入为原始表格图像，系统内部中间结果包括预处理图像、候选策略评分、检索到的参考示例、结构识别输出、质量评估报告和后处理结果，最终输出则包括表格结构结果、结构化单元格数据与识别摘要。当前系统主流程与结果展示链路已经基本打通，说明本课题的总体方案不仅在方法层面具有可行性，也具备了较明确的工程落地路径。
 
 
-\subsection{数据集、实验环境与评价指标}
+\subsection{数据集与评价指标}
 
 
-为验证所提方法的可行性与有效性，本课题围绕复杂表格识别任务构建了相应的数据组织方式、实验运行环境和评价体系。当前阶段的实验并非只针对单一类型表格进行验证，而是有意识地覆盖规则表格、科研论文复杂表格以及弱线框复杂布局表格等多种场景，以尽可能反映方法在真实应用条件下的适应能力。同时，结合系统当前的工程实现，已完成数据格式统一、示例库构建、阶段性测试组织和指标统计等基础工作，为后续开展更系统的对比实验和误差分析提供了条件。
+为验证所提方法的可行性与有效性，本课题围绕复杂表格识别任务构建了相应的数据组织方式和评价体系。当前阶段的实验并非只针对单一类型表格进行验证，而是有意识地覆盖规则表格、科研论文复杂表格以及弱线框复杂布局表格等多种场景，以尽可能反映方法在真实应用条件下的适应能力。同时，结合系统当前的工程实现，已完成数据格式统一、示例库构建、阶段性测试组织和指标统计等基础工作，为后续开展更系统的对比实验和误差分析提供了条件。
 
 
 \subsubsection{数据来源与场景划分}
@@ -210,26 +210,19 @@
 \label{fig:data-scale}
 \end{figure}
 
-\subsubsection{实验环境与系统实现基础}
-
-
-从实验运行方式看，当前课题采用“一体化研究验证平台”的组织方式，将识别主流程、实验管理与结果展示纳入统一环境中开展。该平台能够支持图像处理、特征表达、相似样本检索、多模态推理、结果统计与展示等任务，从而为中期阶段的模块联调、场景对比和阶段性验证提供稳定支撑。
-
-
-从实验基础看，当前环境已经能够覆盖课题所需的主要研究环节，包括输入样本组织、预处理实验、上下文学习识别、结果质量评估以及结构化结果分析等内容。这样的环境组织方式一方面有利于保持不同模块之间的输入输出一致性，另一方面也便于后续开展消融实验、对比实验和系统联调测试。
-
-
 \subsubsection{评价指标与评价方式}
 
 
 在评价体系设计上，当前阶段主要围绕“识别结果是否接近真实表格结构与内容”这一核心目标展开。考虑到表格识别不仅涉及文本内容抽取，还涉及行列关系、单元格跨度以及整体拓扑结构恢复，因此本课题在阶段性实验中主要采用两类指标进行评估：一类是综合反映表格结构与内容一致性的\textbf{TEDS} 指标，用于衡量预测结果与真实结构化标注之间的整体接近程度；另一类是重点反映结构恢复质量的\textbf{TEDS-Struct} 指标，用于在忽略具体文本内容的条件下，更集中地衡量模型对表格骨架、行列关系和合并单元格结构的恢复能力。
+
+具体而言，\textbf{TEDS}（Tree-Edit-Distance-based Similarity）是一种基于树编辑距离的表格相似度指标。该指标通常先将预测表格和标准答案表格统一表示为 HTML/DOM 树结构，再计算二者之间的树编辑距离，并将差异归一化为 [0,1] 范围内的相似度分数。TEDS 越接近 1，表示预测结果与标准答案在表格标签结构、单元格组织关系、跨行跨列属性以及文本内容等方面越一致；分数越低，则说明预测结果需要更多插入、删除或替换操作才能变换为标准答案。\textbf{TEDS-Struct} 可以理解为 TEDS 的结构化变体，其核心区别在于计算时弱化或去除单元格文本内容，仅保留表格标签、行列层级、单元格边界以及跨行跨列等结构信息，因此更适合单独衡量表格骨架和拓扑关系的恢复质量。为便于与后续实验表格保持一致，本文在结果统计中通常将 TEDS 和 TEDS-Struct 以百分制形式展示。
 
 上述两类指标在当前课题中具有互补作用。TEDS 指标能够综合反映“结构 + 内容”的整体识别效果，适合评价最终输出质量；TEDS-Struct 指标则更适合分析预处理、结构推理和后处理等模块对表格骨架恢复的影响。在当前阶段实验中，也正是通过同时观察这两类指标的变化，才能较清楚地区分“结构变好但内容收益不稳定”与“整体质量同步提升”这两种不同情况。因此，这两项指标已成为本课题现阶段进行模型比较和模块验证的核心评价依据。
 
 除定量指标外，课题当前还采用定性分析与过程记录相结合的方式辅助评价。一方面，通过对预处理前后图像、识别结果渲染图、结构化标签结果和最终输出结果进行对比，分析不同模块在典型样本上的实际改善效果；另一方面，系统还会保存部分中间结果、处理日志和评分摘要，用于观察候选预处理路径选择、结构修复前后变化以及失败样本的主要问题来源。这种“定量指标 + 可视化样例 + 过程日志”的评价方式，有助于在中期阶段更全面地理解模型行为，而不仅仅停留在单一数值结果的比较上。
 
 
-总体而言，当前阶段已经形成了较为完整的数据组织、实验环境和评价指标体系：在数据层面，覆盖了规则表格、科研论文复杂表格和真实复杂布局表格等多类场景；在环境层面，形成了可运行、可展示、可扩展的系统原型；在评价层面，则建立了以 TEDS 和 TEDS-Struct 为核心、辅以样例分析和过程记录的综合评价方式。这为后续继续开展预处理优化、上下文学习策略改进、后处理稳定性提升以及系统综合评测奠定了良好基础。
+总体而言，当前阶段已经形成了较为完整的数据组织和评价指标体系：在数据层面，覆盖了规则表格、科研论文复杂表格和真实复杂布局表格等多类场景；在评价层面，则建立了以 TEDS 和 TEDS-Struct 为核心、辅以样例分析和过程记录的综合评价方式。这为后续继续开展预处理优化、上下文学习策略改进、后处理稳定性提升以及系统综合评测奠定了良好基础。
 
 \subsection{动态感知的表格预处理模块}
 
@@ -255,7 +248,7 @@
 结合当前系统实现，动态感知预处理模块已经形成较为完整的闭环流程，其整体框架如图2-1所示。该模块的核心处理过程可概括为五个阶段：输入图像质量分析、候选处理链生成、候选链并行执行、候选结果综合评分以及最优结果选择与过程记录。与传统单路径预处理方式相比，该设计强调“先判断问题，再决定路径”，其目标不是机械地对图像做统一增强，而是尽可能选择更有利于后续表格结构恢复的处理结果。
 
 
-在输入质量分析阶段，系统首先接收原始图像，并调用大模型对图像中可能存在的主要问题进行判断，例如是否存在明显噪声、对比度不足、清晰度下降、表格边界冗余或线条不易辨识等。基于这一分析结果，大模型会生成若干候选预处理链定义。考虑到大模型生成结果在稳定性上可能存在波动，系统同时设计了默认候选路径作为回退机制，以保证在大模型生成不足、链条定义不可用或候选数量过少时，预处理模块仍可稳定运行。当前系统默认保留的候选思路主要包括“增强对比度并突出表格线条”“先去噪再增强”“先调整亮度分布再锐化”以及“先裁剪有效区域再做增强”等几类典型路径，并将候选链数量控制在较小范围内，以兼顾多样性与运行效率。
+在输入质量分析阶段，系统首先接收原始图像，并调用大模型对图像中可能存在的主要问题进行判断，例如是否存在明显噪声、对比度不足、清晰度下降、表格边界冗余或线条不易辨识等。基于这一分析结果，大模型会生成若干候选预处理链定义，并将候选链数量控制在较小范围内，以兼顾多样性与运行效率。
 
 
 在候选链生成与执行阶段，系统将原始图像也作为一个候选基准，与各条预处理链的结果一起参与比较。这样做的意义在于，系统不会默认“处理后的结果一定优于原图”，而是允许在某些样本上直接保留原始输入，避免不必要的过处理。对于生成的多条候选链，模块采用并行执行方式，以减少整体等待时间，并为后续评分与选择阶段提供可比较的候选结果集合。
@@ -284,7 +277,7 @@
 在评分机制方面，系统采用“客观评分 + 大模型评分”的融合方式。客观评分部分主要从图像本身的可辨识性出发，综合考虑清晰度、对比度、边缘质量、表格结构完整性以及噪声惩罚等因素。其中，清晰度主要反映图像边缘细节是否足够明确，对比度反映前景与背景区分程度，边缘质量和表格结构完整性则更贴近表格线条连续性和整体骨架可恢复性。为避免异常样本干扰，评分模块还对接近全黑、全白以及过度二值化的情况进行了专门处理，使评分结果更符合文档图像的实际特征。
 
 
-为使该评分机制的表达更加完整，并与当前研究设定保持一致，设候选图像 $I_k$ 的灰度图为 $G_k$，系统首先计算清晰度、对比度、边缘质量和表格结构完整性等客观指标。其中清晰度和对比度为
+为使该评分机制的表达更加完整，并与当前代码实现保持一致，设候选图像 $I_k$ 的灰度图为 $G_k$，系统首先计算清晰度、对比度、边缘质量和表格结构完整性等客观指标。其中清晰度和对比度为
 
 \begin{equation}
 R_s(I_k)=\operatorname{Var}\!\left(\Delta G_k\right)
@@ -294,56 +287,94 @@ R_s(I_k)=\operatorname{Var}\!\left(\Delta G_k\right)
 R_c(I_k)=\operatorname{Std}\!\left(G_k\right)
 \end{equation}
 
-其中，$\Delta$ 表示拉普拉斯算子，$\operatorname{Var}(\cdot)$ 表示方差，$\operatorname{Std}(\cdot)$ 表示标准差。与简单最小--最大归一化不同，研究中对清晰度采用对数自适应归一化：
+其中，$\Delta$ 表示拉普拉斯算子，$\operatorname{Var}(\cdot)$ 表示方差，$\operatorname{Std}(\cdot)$ 表示标准差。由于拉普拉斯方差的取值范围较大，直接线性归一化容易受极端清晰样本影响，因此清晰度采用基于固定参考区间的对数尺度归一化。设清晰度参考下界和上界分别为 $R_s^{\min}$ 与 $R_s^{\max}$，则有
 
 \begin{equation}
-Q_s(I_k)=\operatorname{clip}\left(\frac{\log(1+R_s(I_k))-\log 2}{\log 5001-\log 2},0,1\right)
+Q_s(I_k)=\operatorname{clip}\left(\frac{\log(1+R_s(I_k))-\log(1+R_s^{\min})}{\log(1+R_s^{\max})-\log(1+R_s^{\min})},0,1\right)
 \end{equation}
 
-对比度归一化则结合二值化检测与过度增强惩罚，可概括为
+当前参数设置中取 $R_s^{\min}=1$、$R_s^{\max}=5000$。这两个值并不是由单张输入图像动态估计得到，而是作为经验参考范围用于将大多数文档表格图像的拉普拉斯方差映射到 $[0,1]$，其中对数变换用于压缩过大的清晰度数值，截断函数则用于处理低于下界或高于上界的极端情况。
+
+对比度归一化则结合二值化检测与过度增强惩罚。设二值化图像的固定对比度得分为 $q_c^{\mathrm{bin}}$，对比度归一化参考上界为 $R_c^{\max}$，过高对比度惩罚阈值为 $R_c^{\mathrm{high}}$，最低惩罚系数为 $p_c^{\min}$，则可概括为
 
 \begin{equation}
 Q_c(I_k)=
 \begin{cases}
-0.3, & I_k\text{ 被判定为二值化图像},\\
-\operatorname{clip}\left(\dfrac{R_c(I_k)}{120}\,p_c,0,1\right), & \text{其他情况},
+q_c^{\mathrm{bin}}, & I_k\text{ 被判定为二值化图像},\\
+\operatorname{clip}\left(\dfrac{R_c(I_k)}{R_c^{\max}}\,p_c,0,1\right), & \text{其他情况},
 \end{cases}
 \end{equation}
 
-其中，当 $R_c(I_k)\le 100$ 时 $p_c=1$，否则 $p_c=\max\{0.6,1-(R_c(I_k)-100)/100\}$。边缘质量由 Canny 边缘密度与 Sobel 梯度强度共同确定，可写为
-
 \begin{equation}
-Q_e(I_k)=\operatorname{clip}\left(\frac{0.5\min(d_e/0.2,1)+0.5\min(g_e/150,1)}{0.5},0,1\right)
+p_c=
+\begin{cases}
+1, & R_c(I_k)\le R_c^{\mathrm{high}},\\
+\max\left\{p_c^{\min},1-\dfrac{R_c(I_k)-R_c^{\mathrm{high}}}{R_c^{\mathrm{high}}}\right\}, & R_c(I_k)>R_c^{\mathrm{high}}.
+\end{cases}
 \end{equation}
 
-其中，$d_e$ 表示边缘像素密度，$g_e$ 表示边缘区域的平均梯度强度。表格结构完整性通过霍夫直线检测得到的水平线和垂直线数量估计：
+当前参数设置中取 $q_c^{\mathrm{bin}}=0.3$、$R_c^{\max}=120$、$R_c^{\mathrm{high}}=100$、$p_c^{\min}=0.6$。这些值同样是经验阈值，用于避免二值化或过度增强图像因灰度标准差过高而获得不合理的高分。
+
+边缘质量由 Canny 边缘密度与 Sobel 梯度强度共同确定。设边缘密度参考上界为 $d_e^{\max}$，梯度强度参考上界为 $g_e^{\max}$，边缘质量二次归一化参考值为 $Q_e^{\mathrm{ref}}$，则有
 
 \begin{equation}
-Q_t(I_k)=\frac{1}{2}\left[\min\left(\frac{n_h}{e_h},1\right)+\min\left(\frac{n_v}{e_v},1\right)\right]
+E(I_k)=\frac{1}{2}\min\left(\frac{d_e}{d_e^{\max}},1\right)+\frac{1}{2}\min\left(\frac{g_e}{g_e^{\max}},1\right)
 \end{equation}
 
-其中，$n_h$ 和 $n_v$ 分别为检测到的水平线与垂直线数量，$e_h$ 和 $e_v$ 为根据图像尺寸动态确定的期望线条数量。综合上述指标后，客观基础分为
+\begin{equation}
+Q_e(I_k)=\operatorname{clip}\left(\frac{E(I_k)}{Q_e^{\mathrm{ref}}},0,1\right)
+\end{equation}
+
+当前参数设置中取 $d_e^{\max}=0.2$、$g_e^{\max}=150$、$Q_e^{\mathrm{ref}}=0.5$。其中前两个参数分别表示边缘密度和边缘强度的经验归一化尺度，$Q_e^{\mathrm{ref}}$ 用于二次归一化，使边缘质量达到中等水平后即可获得较高得分。
+
+表格结构完整性通过霍夫直线检测得到的水平线和垂直线数量估计。设检测到的水平线和垂直线数量分别为 $n_h$ 和 $n_v$，期望水平线和垂直线数量分别为 $e_h$ 和 $e_v$，则原始结构评分为
+
+\begin{equation}
+T(I_k)=\frac{1}{2}\left[\min\left(\frac{n_h}{e_h},1\right)+\min\left(\frac{n_v}{e_v},1\right)\right]
+\end{equation}
+
+最终进入加权求和的结构得分还会再按参考值 $T^{\mathrm{ref}}$ 做一次截断归一化：
+
+\begin{equation}
+Q_t(I_k)=\operatorname{clip}\left(\frac{T(I_k)}{T^{\mathrm{ref}}},0,1\right)
+\end{equation}
+
+当前参数设置中 $T^{\mathrm{ref}}=0.5$，且 $e_h$ 和 $e_v$ 会根据图像尺寸动态确定。为避免在公式中直接写死具体经验值，可将其写为参数化形式：设水平线期望数量下界和上界分别为 $e_h^{\min}$、$e_h^{\max}$，垂直线期望数量下界和上界分别为 $e_v^{\min}$、$e_v^{\max}$，高度和宽度的尺度因子分别为 $r_h$、$r_v$，若图像高度为 $H$、宽度为 $W$，则有
+
+\begin{equation}
+e_h=\max\left\{e_h^{\min},\min\left(e_h^{\max},\left\lfloor\frac{H}{r_h}\right\rfloor\right)\right\}
+\end{equation}
+
+\begin{equation}
+e_v=\max\left\{e_v^{\min},\min\left(e_v^{\max},\left\lfloor\frac{W}{r_v}\right\rfloor\right)\right\}
+\end{equation}
+
+当前参数设置中取 $e_h^{\min}=2$、$e_h^{\max}=5$、$r_h=100$，以及 $e_v^{\min}=2$、$e_v^{\max}=3$、$r_v=150$。这些值是经验尺度，用于根据图像大小估计合理的表格线数量，而不是由单张图像重新学习得到的变量。当霍夫变换检测到的线条过少时，系统还会根据图像面积返回较低的回退结构分数，以避免无法检测线条时直接给出过高评分。
+
+综合上述指标后，客观基础分为
 
 \begin{equation}
 S_{\mathrm{base}}(I_k)=w_sQ_s(I_k)+w_cQ_c(I_k)+w_eQ_e(I_k)+w_tQ_t(I_k)
 \end{equation}
 
-当前参数设置中 $w_s=0.30$、$w_c=0.25$、$w_e=0.20$、$w_t=0.25$。系统还会估计噪声水平并施加惩罚，噪声估计取高斯滤波、中值滤波和双边滤波后三种残差标准差的最大值：
+当前参数设置中 $w_s=0.30$、$w_c=0.25$、$w_e=0.20$、$w_t=0.25$，后续可以根据实验结果继续调整。系统还会估计噪声水平并施加惩罚，噪声估计取高斯滤波、中值滤波和双边滤波后三种残差标准差的最大值：
 
 \begin{equation}
 R_n(I_k)=\max\{\operatorname{Std}(G_k-B_g(G_k)),\operatorname{Std}(G_k-B_m(G_k)),\operatorname{Std}(G_k-B_b(G_k))\}
 \end{equation}
 
-对应的噪声惩罚系数为
+设无噪声惩罚阈值为 $R_n^{0}$，轻微噪声阈值为 $R_n^{1}$，严重噪声参考上界为 $R_n^{2}$，轻微噪声最大惩罚为 $p_n^{\mathrm{mid}}$，最大噪声惩罚为 $p_n^{\max}$，则噪声惩罚系数为
 
 \begin{equation}
 p_n=
 \begin{cases}
-0, & R_n<5,\\
-0.2(R_n-5)/10, & 5\le R_n<15,\\
-\operatorname{clip}\left(0.2+0.3(R_n-15)/35,0,0.5\right), & R_n\ge 15.
+0, & R_n<R_n^{0},\\
+p_n^{\mathrm{mid}}\dfrac{R_n-R_n^{0}}{R_n^{1}-R_n^{0}}, & R_n^{0}\le R_n<R_n^{1},\\
+\operatorname{clip}\left(p_n^{\mathrm{mid}}+(p_n^{\max}-p_n^{\mathrm{mid}})\dfrac{R_n-R_n^{1}}{R_n^{2}-R_n^{1}},0,p_n^{\max}\right), & R_n\ge R_n^{1}.
 \end{cases}
 \end{equation}
+
+当前参数设置中取 $R_n^{0}=5$、$R_n^{1}=15$、$R_n^{2}=50$、$p_n^{\mathrm{mid}}=0.2$、$p_n^{\max}=0.5$。其中 $R_n^{2}-R_n^{1}=35$ 表示严重噪声区间的跨度，$p_n^{\max}-p_n^{\mathrm{mid}}=0.3$ 表示高噪声阶段新增惩罚幅度。
 
 因此，客观评分可概括为
 
@@ -351,7 +382,7 @@ p_n=
 S_{\mathrm{objective}}(I_k)=\operatorname{clip}\left(S_{\mathrm{base}}(I_k)(1-p_n)(1-p_b),0,1\right)
 \end{equation}
 
-其中，$p_b$ 表示二值化图像惩罚项：若图像被判定为接近全黑、全白或过度二值化，则按规则降低得分；若二值化图像仍具有清晰表格结构，则仅施加很小惩罚或不施加额外惩罚。该表达较完整地体现了当前评分机制对边缘、结构与噪声因素的综合考虑。
+其中，$p_b$ 表示二值化图像惩罚项：若图像被判定为接近全黑、全白或过度二值化，则按规则降低得分；若二值化图像仍具有清晰表格结构，则仅施加很小惩罚或不施加额外惩罚。相较于仅由清晰度和对比度组成的简化表达，该公式更完整地体现了当前评分机制对边缘、结构和噪声因素的综合考虑。
 
 在大模型评分部分，系统调用大模型对候选图像进行质量分析，给出面向后续识别可用性的主观评价。该部分评分更关注“图像是否更适合表格识别”这一语义层面的判断，而不仅仅是像素层面的变化。大模型返回的百分制评分会先归一化到 $[0,1]$，随后与客观评分融合；若大模型评分因接口异常或调用失败无法获得，则自动退化为仅使用客观评分，保证模块的鲁棒性和可用性。综合评分可写为
 
@@ -363,15 +394,9 @@ S_{\mathrm{objective}}(I_k), & \text{LLM 评分不可用},
 \end{cases}
 \end{equation}
 
-当前参数设置中 $\alpha=0.70$、$\beta=0.30$。对于最终候选链选择，若候选路径包含智能裁剪操作，研究中还会额外加入 $0.1$ 的裁剪鼓励项，即
+当前参数设置中 $\alpha=0.70$、$\beta=0.30$。链条内部的逐步决策依据处理前后综合评分进行比较：若某一步处理后评分不低于处理前评分，则保留该步结果，否则回退到处理前图像。这一规则体现了链条内部的接受/拒绝逻辑，能够避免无效处理步骤降低候选图像质量。
 
-\begin{equation}
-S_{\mathrm{select}}(I_k)=S_{\mathrm{total}}(I_k)+0.1\,\mathbf{1}_{\mathrm{smart\_crop}}(I_k)
-\end{equation}
-
-链条内部的逐步决策则依据处理前后综合评分进行比较：除智能裁剪步骤采用优先保留策略外，若某一步处理后评分不低于处理前评分，则保留该步结果，否则回退到处理前图像。
-
-此外，当前预处理模块还具备较完整的过程记录能力。研究中会保留原始图像、各候选路径结果、最佳策略摘要以及步骤级决策信息。这意味着当前模块不仅能够输出“最优结果”，还能够回答“为什么选择该结果”“哪些操作被保留”“哪些步骤被放弃”等问题。这种可解释性对于中期阶段的方法分析尤为重要，也为后续进一步开展误差归因和策略改进提供了基础。
+此外，当前预处理模块还实现了较完整的过程保存功能。系统会为每次处理生成唯一标识，并保存原始图像、各候选路径结果、最佳策略摘要以及步骤级决策记录。这意味着当前模块不仅能够输出“最优结果”，还能够回答“为什么选择该结果”“哪些操作被保留”“哪些步骤被放弃”等问题。这种可解释性对于中期阶段的方法分析尤为重要，也为后续进一步开展误差归因和策略改进提供了基础。
 
 
 \subsubsection{阶段性结果与分析}
@@ -379,6 +404,65 @@ S_{\mathrm{select}}(I_k)=S_{\mathrm{total}}(I_k)+0.1\,\mathbf{1}_{\mathrm{smart\
 
 从当前阶段的实验输出看，动态感知预处理模块已经完成了首轮可行性验证，并在典型样本和场景级测试中表现出一定的积极作用。以编号为0908.4144v1.7的测试样本为例，系统在预处理阶段同时比较了“原始图像”“去噪并增强对比度”和“伽马校正后锐化”三条候选策略，最终选择“伽马校正后锐化”作为当前样本的最优路径，综合评分由0.4937提升至0.5143。进一步观察链条内部决策可以发现，在该路径中，“伽马校正”步骤的评分提升不明显，因此被舍弃，而“锐化”步骤带来了更明显的正向增益，最终被保留。这说明当前模块已经不再停留在“多条路径都跑一遍”的浅层尝试上，而是初步具备了在链条级和步骤级同时进行动态选择的能力。
 
+为进一步展示预处理模块在真实样本上的作用，本文将四组样例整理为一个整体对比表，如图\ref{fig:preprocess-overall-table} 所示。表中每一行对应一组样本，按照“表格原图、预处理图像、直接识别结果、预处理识别结果、标准答案”的顺序展示完整链条，便于同时观察图像增强效果与识别结果变化。四组样例分别来自 SciTSR、SciTSR、WTW 和 PubTabNet/PMC 等不同数据来源；其中第三组为 WTW 中的商品/医疗清单类表格，具有竖向版式、文字密集和局部边界弱等特点。Sci 与 Pub 类样本主要受益于表格线增强，WTW 商品清单样本则更适合通过锐化突出局部文字与边界。整体来看，预处理后的结果在表格边界、行列组织和单元格对齐方面更接近标准答案，尤其能够减少弱线条样本中的结构缺失和局部错位问题。
+
+
+\begin{figure}[p]
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{1.5pt}
+\newcommand{\precell}[2]{%
+  \begin{minipage}[c][0.132\textheight][c]{0.182\textwidth}
+  \centering
+  {\tiny #1\par}\vspace{0.4mm}
+  \includegraphics[width=\linewidth,height=0.108\textheight,keepaspectratio]{#2}
+  \end{minipage}}
+\newcommand{\preimgcell}[1]{%
+  \begin{minipage}[c][0.132\textheight][c]{0.182\textwidth}
+  \centering
+  \includegraphics[width=\linewidth,height=0.117\textheight,keepaspectratio]{#1}
+  \end{minipage}}
+\begin{tabular}{|>{\centering\arraybackslash}m{0.188\textwidth}|>{\centering\arraybackslash}m{0.188\textwidth}|>{\centering\arraybackslash}m{0.188\textwidth}|>{\centering\arraybackslash}m{0.188\textwidth}|>{\centering\arraybackslash}m{0.188\textwidth}|}
+\hline
+表格原图 & 预处理图像 & 直接识别结果 & 预处理识别结果 & 标准答案 \\
+\hline
+\multicolumn{5}{|l|}{\textbf{样本一：Sci 数据集（1711.09541v1.2）}} \\
+\hline
+\precell{原始表格}{figures/preprocess_case_1711_original.jpg} &
+\precell{表格线增强}{figures/preprocess_case_1711_processed.jpg} &
+\preimgcell{figures/preprocess_case_1711_direct.png} &
+\preimgcell{figures/preprocess_case_1711_after.png} &
+\preimgcell{figures/preprocess_case_1711_gt.png} \\
+\hline
+\multicolumn{5}{|l|}{\textbf{样本二：Sci 数据集（1803.11333v1.1）}} \\
+\hline
+\precell{原始表格}{figures/preprocess_case_1803_original.jpg} &
+\precell{表格线增强}{figures/preprocess_case_1803_processed.jpg} &
+\preimgcell{figures/preprocess_case_1803_direct.png} &
+\preimgcell{figures/preprocess_case_1803_after.png} &
+\preimgcell{figures/preprocess_case_1803_gt.png} \\
+\hline
+\multicolumn{5}{|l|}{\textbf{样本三：WTW 数据集（商品/医疗清单类表格）}} \\
+\hline
+\precell{原始表格}{figures/preprocess_case_commodity_original.jpg} &
+\precell{锐化与局部增强}{figures/preprocess_case_commodity_processed.jpg} &
+\preimgcell{figures/preprocess_case_commodity_direct.png} &
+\preimgcell{figures/preprocess_case_commodity_after.png} &
+\preimgcell{figures/preprocess_case_commodity_gt.png} \\
+\hline
+\multicolumn{5}{|l|}{\textbf{样本四：Pub 数据集（PMC5603042）}} \\
+\hline
+\precell{原始表格}{figures/preprocess_case_pmc_original.jpg} &
+\precell{表格线增强}{figures/preprocess_case_pmc_processed.jpg} &
+\preimgcell{figures/preprocess_case_pmc_direct.png} &
+\preimgcell{figures/preprocess_case_pmc_after.png} &
+\preimgcell{figures/preprocess_case_pmc_gt.png} \\
+\hline
+\end{tabular}
+\caption{四组预处理样本的原图、预处理图像与识别结果整体对比}
+\label{fig:preprocess-overall-table}
+\end{figure}
 
 从场景级测试结果来看，当前阶段整理得到的测试结果也反映出预处理模块具有一定的结构优化价值。根据当前实验数据，Qwen3-VL-8B 与 Gemma-4-E4B 均已形成较为直接的“基线配置—引入预处理”对照关系。对应统计结果可整理如下。
 
@@ -393,7 +477,7 @@ S_{\mathrm{select}}(I_k)=S_{\mathrm{total}}(I_k)+0.1\,\mathbf{1}_{\mathrm{smart\
 \hline
 场景 & 指标 & \multicolumn{3}{c|}{Qwen3-VL-8B} & \multicolumn{3}{c|}{Gemma-4-E4B} \\
 \cline{3-8}
- &  & Baseline & + Preprocess & $\Delta$ & Baseline & + Preprocess & $\Delta$ \\
+ &  & Baseline & + Preprocess & 增益 & Baseline & + Preprocess & 增益 \\
 \hline
 Pub & TEDS & 68.33 & \textbf{68.51} & +0.18 & \textbf{69.51} & 69.01 & -0.50 \\
 \hline
@@ -537,10 +621,10 @@ WTW & TEDS-Struct & 36.84 & \textbf{40.61} & +3.77 & 36.27 & \textbf{38.28} & +2
 \mathrm{LLM}\bigl(I, f(x_1,y_1), \ldots, f(x_k,y_k), f(x_t)\bigr) \rightarrow y_t
 \end{equation}
 
-其中，$y_t$ 表示目标表格对应的结构识别结果。进一步地，设完整示例库为 $D=\{d_i\}$，示例特征为 $v_i$，目标图像特征为 $v_t$。研究中首先计算非负余弦相似度
+其中，$y_t$ 表示目标表格对应的结构识别结果。进一步地，设完整示例库为 $D=\{d_i\}$，示例特征为 $v_i$，目标图像特征为 $v_t$。系统首先计算非负余弦相似度。为避免符号混淆，记 $\delta_{\cos}(a,b)$ 为余弦距离，即 $1$ 减去标准余弦相似度，则有
 
 \begin{equation}
-s_i=\max\left(0,1-\operatorname{cosine}(v_t,v_i)\right)
+s_i=\max\left(0,1-\delta_{\cos}(v_t,v_i)\right)
 \end{equation}
 
 并依据相似度阈值 $\tau$ 形成候选示例集合
@@ -564,10 +648,10 @@ D_k=\arg\max_{D'\subseteq D_\tau,\ |D'|=k'}\left[\lambda\,\mathrm{Sim}(D',x_t)+(
 多样性项采用示例两两特征余弦距离的平均值：
 
 \begin{equation}
-\mathrm{Div}(D')=\frac{2}{|D'|(|D'|-1)}\sum_{i<j,\ d_i,d_j\in D'}\operatorname{cosine}(v_i,v_j)
+\mathrm{Div}(D')=\frac{2}{|D'|(|D'|-1)}\sum_{i<j,\ d_i,d_j\in D'}\delta_{\cos}(v_i,v_j)
 \end{equation}
 
-当 $|D'|=1$ 时，多样性项记为 $0$。当前参数设置中 $\lambda=0.7$、$\tau=0.6$。对于规模较小的候选集合，研究中采用组合穷举搜索；对于较大的候选集合，则采用贪心近似选择，因此上述公式对应的是当前示例选择策略的目标函数和约束条件。
+当 $|D'|=1$ 时，多样性项记为 $0$。当前参数设置中 $\lambda=0.7$、$\tau=0.6$。对于规模不超过 20 的候选集合，系统采用组合穷举搜索；对于更大的候选集合，则采用贪心近似选择，因此上述公式对应的是当前示例选择策略的目标函数和约束条件。需要说明的是，当示例库规模本身不超过所需示例数 $k$ 时，系统会直接返回全部示例，这属于工程上的边界回退逻辑。
 
 \subsubsection{提示构造与大模型结构识别实现}
 
